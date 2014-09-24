@@ -7,7 +7,10 @@
 module LLVM.General.Internal.Target where
 
 import Control.Monad hiding (forM)
-import Control.Monad.Except hiding (forM)
+import Control.Monad.Trans.Except hiding (forM)
+import Control.Monad.IO.Class
+import Control.Monad.Error.Class
+import Control.Monad.AnyCont
 import Control.Exception
 import Data.Functor
 import Data.Traversable (forM)
@@ -94,7 +97,7 @@ lookupTarget arch triple = flip runAnyContT return $ do
   arch <- encodeM (maybe "" id arch)
   triple <- encodeM triple
   target <- liftIO $ FFI.lookupTarget arch triple cNewTripleP cErrorP
-  when (target == nullPtr) $ throwError =<< decodeM cErrorP
+  when (target == nullPtr) $ throwACE =<< decodeM cErrorP
   liftM (Target target, ) $ decodeM cNewTripleP
 
 -- | <http://llvm.org/doxygen/classllvm_1_1TargetOptions.html>

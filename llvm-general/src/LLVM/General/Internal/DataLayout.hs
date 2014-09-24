@@ -1,8 +1,8 @@
 module LLVM.General.Internal.DataLayout where
 
-import Control.Monad.Except
 import Control.Monad.AnyCont
 import Control.Exception
+import Control.Monad.IO.Class
 
 import Foreign.Ptr
 

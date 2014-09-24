@@ -12,6 +12,8 @@ import Language.Haskell.TH.Quote
 import Control.Monad
 import Control.Monad.AnyCont
 import Control.Monad.IO.Class
+import Control.Monad.Trans.Except 
+
 
 import Data.Data (Data)
 import Data.Word (Word, Word32, Word64)
@@ -30,6 +32,11 @@ class EncodeM e h c where
 
 class DecodeM d h c where
   decodeM :: c -> d h
+
+--instance DecodeM (AnyContT (ExceptT String IO)) String
+--                       (Ptr (FFI.OwnerTransfered  CString)) where 
+
+--    decodeM = error "FIXME THIS IS OVERLAPPING"                        
 
 genCodingInstance :: (Data c, Data h) => TypeQ -> Name -> [(c, h)] -> Q [Dec]
 genCodingInstance ht ctn chs = do

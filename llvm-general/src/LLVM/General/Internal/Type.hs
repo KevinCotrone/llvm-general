@@ -7,7 +7,8 @@ module LLVM.General.Internal.Type where
 import Control.Applicative
 import Control.Monad.State
 import Control.Monad.AnyCont
-import Control.Monad.Except
+import Control.Monad.Trans.Except
+import Control.Monad.Error.Class
 
 import qualified Data.Set as Set
 

@@ -9,7 +9,7 @@ import Control.Exception
 import Control.Monad
 import Control.Monad.IO.Class
 import Control.Monad.AnyCont
-import Control.Monad.Except
+import Control.Monad.Trans.Except
 
 import Data.Word
 import Data.IORef

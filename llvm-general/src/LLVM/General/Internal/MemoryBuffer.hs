@@ -6,7 +6,9 @@ module LLVM.General.Internal.MemoryBuffer where
 
 import Control.Exception
 import Control.Monad
-import Control.Monad.Except
+import Control.Monad.Trans.Except
+import Control.Monad.IO.Class
+import Control.Monad.Error.Class
 import Control.Monad.AnyCont
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Unsafe as BS

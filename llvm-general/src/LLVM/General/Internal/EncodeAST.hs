@@ -8,8 +8,9 @@ module LLVM.General.Internal.EncodeAST where
 import Control.Applicative
 import Control.Exception
 import Control.Monad.State
-import Control.Monad.Except
+import Control.Monad.Trans.Except
 import Control.Monad.AnyCont
+import Control.Monad.Error.Class
 
 import Foreign.Ptr
 import Foreign.C
@@ -47,12 +48,20 @@ newtype EncodeAST a = EncodeAST { unEncodeAST :: AnyContT (ExceptT String (State
        Functor,
        Applicative,
        Monad,
-       MonadIO,
-       MonadState EncodeState,
-       MonadError String,
-       MonadAnyCont IO,
-       ScopeAnyCont
+       MonadIO
+       --MonadState EncodeState,
+       --MonadError String,
+       --MonadAnyCont IO,
+       --ScopeAnyCont
      )
+
+instance MonadState EncodeState EncodeAST where 
+
+instance MonadError String EncodeAST where 
+
+instance ScopeAnyCont EncodeAST where 
+
+instance MonadAnyCont IO EncodeAST where  
 
 lookupNamedType :: A.Name -> EncodeAST (Ptr FFI.Type)
 lookupNamedType n = do

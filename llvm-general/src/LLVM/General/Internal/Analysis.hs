@@ -1,6 +1,6 @@
 module LLVM.General.Internal.Analysis where
 
-import Control.Monad.Except
+import Control.Monad.Trans.Except
 import Control.Monad.AnyCont
 
 import qualified LLVM.General.Internal.FFI.Analysis as FFI

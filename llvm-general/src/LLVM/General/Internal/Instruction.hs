@@ -14,9 +14,9 @@ import LLVM.General.Internal.InstructionDefs (instrP)
 
 import Data.Functor
 import Control.Monad
-import Control.Monad.Except
 import Control.Monad.AnyCont
 import Control.Monad.State
+import Control.Monad.Error.Class
 
 import Foreign.Ptr
 

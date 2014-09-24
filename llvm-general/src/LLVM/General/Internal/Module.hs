@@ -9,10 +9,11 @@ module LLVM.General.Internal.Module where
 
 import Control.Monad.Trans
 import Control.Monad.State
-import Control.Monad.Except
+import Control.Monad.Trans.Except
 import Control.Monad.AnyCont
 import Control.Applicative
 import Control.Exception
+import Control.Monad.Error.Class
 
 import Foreign.Ptr
 import Foreign.C
