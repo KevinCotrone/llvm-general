@@ -98,6 +98,8 @@ linkModules preserveRight (Module m) (Module m') = flip runAnyContT return $ do
 class LLVMAssemblyInput s where
   llvmAssemblyMemoryBuffer :: (Inject String e, MonadError e m, MonadIO m, MonadAnyCont IO m)
                               => s -> m (FFI.OwnerTransfered (Ptr FFI.MemoryBuffer))
+  llvmAssemblyMemoryBufferExcept :: (Inject String e, MonadIO m, MonadAnyCont IO m)
+                              => s -> ExceptionT e m (FFI.OwnerTransfered (Ptr FFI.MemoryBuffer))                   
 
 instance LLVMAssemblyInput (String, String) where
   llvmAssemblyMemoryBuffer (id, s) = do
